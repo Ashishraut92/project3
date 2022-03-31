@@ -3,6 +3,7 @@ const router = express.Router();
 const usercontroller=require("../controllers/userController")
 const bookcontroller=require("../controllers/bookController")
 const reviewcontroller=require("../controllers/reviewController")
+const middleware=require("../authenticate/auth")
 
 
 
@@ -10,7 +11,7 @@ const reviewcontroller=require("../controllers/reviewController")
 
 router.post("/createUser",usercontroller.createUser)
 router.post("/login",usercontroller.userLogin)
-router.post("/createBook", bookcontroller.createBook)
+router.post("/createBook",middleware.authenticate, bookcontroller.createBook)
 router.get("/getBooks",bookcontroller.getBooks)
 router.put("/updateBook/:bookId",bookcontroller.updateBook)
 router.get("/getBookById",bookcontroller.getBookById)
